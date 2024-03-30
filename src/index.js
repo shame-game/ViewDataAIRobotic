@@ -72,12 +72,12 @@ else {
             vam('#Logo_a').src = './src/image/Logomini.png';
             vam('.home').innerHTML = '<i class="bi bi-bar-chart-line-fill"></i>';
             vam('.student').innerHTML = '<i class="bi bi-person-fill"></i>';
-            vam('.device').innerHTML = '<i class="bi bi-robot"></i>';
+            // vam('.device').innerHTML = '<i class="bi bi-robot"></i>';
         } else {
             vam('#Logo_a').src = './src/image/Logo.png';
             vam('.home').innerHTML = '<i class="bi bi-bar-chart-line-fill"></i>Overview';
             vam('.student').innerHTML = '<i class="bi bi-person-fill"></i>Student';
-            vam('.device').innerHTML = '<i class="bi bi-robot"></i>Device';
+            // vam('.device').innerHTML = '<i class="bi bi-robot"></i>Device';
         }
     });
 }
@@ -224,7 +224,7 @@ function HienTrangChu() {
             datasets: [
                 {
                     label: 'Value',
-                    data: [24, 15, 35, 5, 3],
+                    data: [24, 15, 35, 1, 0],
                     backgroundColor: '#57D0F6',
                     stack: 'Stack 0',
                 },
@@ -307,4 +307,3 @@ function loaddevice(callback) {
             callback(data)
         });
 }
-
