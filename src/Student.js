@@ -1,0 +1,44 @@
+
+function pageStudent(callback) {
+    vam('#main').innerHTML +=
+        `<div id='T__Student' class="main-title row" style="height:100%;min-width:1100px;margin:0">
+            <div class="col-lg-12" style="height: 100%;display: flex;flex-direction: column;padding: calc(20px + .5rem)">
+                <div class="Student__Main">
+                    <div class="Student__Main-wrap">
+                        <div class="loading title">
+                            <div style="display: flex;
+                            height: 100%;align-items: center;">
+                                <p style="margin:0">Dashboard ● Student</p>
+                            </div>
+                            <div class="detail__search">
+                                <input type="search" onkeyup="searchData()" placeholder="Seacrh By Name" id="SearchStudent">
+                                    <button id="search" class="">
+                                        <i class="bi bi-search"></i>
+                                    </button>
+                                    <p><i class="bi bi-x-lg"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Student__Main-wrap" style="margin-top: 1rem;flex:1">
+                        <div class="loading student-detail" >
+                            <div class="student__title">
+                                <a>STT</a>
+                                <a>Name</a>
+                                <a>Class</a>
+                                <a>Address</a>
+                                <a>Numbers</a>
+                                <a>Status</a>
+                            </div>
+                            <div id="student__data">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`
+    let data = 'd'
+    callback(data);
+
+}
+
+
