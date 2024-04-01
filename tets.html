@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Di chuyển nút theo con trỏ chuột</title>
+    <style>
+        #myButton {
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            background-color: blue;
+            color: white;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="myButton" ondblclick="test()">Nút di chuyển</div>
+
+    <script>
+        function test() {
+            console.log('loi');
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const button = document.getElementById('myButton');
+
+            // Sự kiện mousedown để bắt đầu di chuyển nút
+            button.addEventListener('mousedown', function (e) {
+                let offsetX = e.clientX - button.getBoundingClientRect().left;
+                let offsetY = e.clientY - button.getBoundingClientRect().top;
+
+                function moveButton(e) {
+                    let x = e.clientX - offsetX;
+                    let y = e.clientY - offsetY;
+
+                    // Giới hạn di chuyển trong vùng trình duyệt
+                    if (x < 0) x = 0;
+                    if (y < 0) y = 0;
+                    if (x > window.innerWidth - button.offsetWidth) {
+                        x = window.innerWidth - button.offsetWidth;
+                    }
+                    if (y > window.innerHeight - button.offsetHeight) {
+                        y = window.innerHeight - button.offsetHeight;
+                    }
+
+                    button.style.left = x + 'px';
+                    button.style.top = y + 'px';
+                }
+
+                function stopMoving() {
+                    document.removeEventListener('mousemove', moveButton);
+                    document.removeEventListener('mouseup', stopMoving);
+                }
+
+                document.addEventListener('mousemove', moveButton);
+                document.addEventListener('mouseup', stopMoving);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

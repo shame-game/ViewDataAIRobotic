@@ -28,7 +28,7 @@ vam('.sidebar__item.student').onclick = () => {
         vam('.sidebar__item--actived.sidebar__item').classList.remove('sidebar__item--actived');
         vam('.sidebar__item.student').classList.add('sidebar__item--actived')
         vam('#main').innerHTML = ''
-        vam('.topbar__title').innerText = 'Studen'
+        vam('.topbar__title').innerText = 'Student'
         HienStudent()
         vam('#search').addEventListener('click', () => {
             vam('.detail__search>input').classList.add('hide')
@@ -140,7 +140,7 @@ function HienTrangChu() {
     pageHome(() => {
         loadstudent((callback) => {
             // datastudent
-            datastudent = callback
+            var datastudent = callback;
             let slstudents = 0;
             let studentOB = {};
             datastudent.forEach((data) => {
@@ -201,16 +201,10 @@ function HienTrangChu() {
                     label: 'Number of equipment',
                     data: [Number(datadevice[0]['Device']) - (Number(datadevice[0]['Device Broken']) + Number(datadevice[0]['Equipment Loaned'])), datadevice[0]['Device Broken'], datadevice[0]['Equipment Loaned']],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                    ],
-                    borderWidth: 1
+                        '#d62323',
+                        '#00f2aa',
+                        '#9747ff',
+                    ]
                 }]
             };
             var doughnutChart = new Chart(document.getElementById('Home__Maind'), {
@@ -218,58 +212,61 @@ function HienTrangChu() {
                 data: doughnutData
             });
         })
-        // test hiển thị biểu đồ học viên
-        const datatext = {
-            labels: ['New Data (day)', 'New Data (week)', 'New Student (week)', 'Waiting To Level Up', 'Leave School'],
-            datasets: [
-                {
-                    label: 'Value',
-                    data: [24, 15, 35, 1, 0],
-                    backgroundColor: '#57D0F6',
-                    stack: 'Stack 0',
-                },
-                {
-                    label: 'KPI',
-                    data: [100 - 24, 100 - 15, 100 - 35],
-                    backgroundColor: '#5D87FF', // Changed color
-                    stack: 'Stack 0',
-                }
-            ]
-        };
-        const config = {
-            type: 'bar',
-            data: datatext,
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                interaction: {
-                    intersect: false,
-                },
-                scales: {
-                    x: {
-                        stacked: true,
-                    },
-                    y: {
-                        stacked: true
+        loadstudent((callback) => {
+            loadCustomer((callbackd) => {
+                const datatext = {
+                    labels: ['New Data (day)', 'New Data (week)', 'New Student (week)', 'Waiting To Level Up', 'Leave School'],
+                    datasets: [
+                        {
+                            label: 'Value',
+                            data: [callbackd[0]['data (day)'], callbackd[0]['data (week)'], callback[0]['New student (week)'], callback[0]['Waiting To Level Up'], callback[0]['Leave School']],
+                            backgroundColor: '#57D0F6',
+                            stack: 'Stack 0',
+                        },
+                        {
+                            label: 'KPI',
+                            data: [callbackd[0]['KPI data (day)'], callbackd[0]['KPI data (week)'], callback[0]['KPI New student (week)']],
+                            backgroundColor: '#5D87FF', // Changed color
+                            stack: 'Stack 0',
+                        }
+                    ]
+                };
+                const config = {
+                    type: 'bar',
+                    data: datatext,
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        interaction: {
+                            intersect: false,
+                        },
+                        scales: {
+                            x: {
+                                stacked: true,
+                            },
+                            y: {
+                                stacked: true
+                            }
+                        },
+                        barPercentage: 0.5
                     }
-                },
-                barPercentage: 0.5
-            }
-        };
-        var myChart = new Chart(
-            document.getElementById('Home__Main'),
-            config
-        );
-        vams('.Home__boxs').forEach((t) => {
-            t.classList.remove('loading')
-        })
-        vams('.Home__Main-wrap>div').forEach((t) => {
-            t.classList.remove('loading')
-        })
+                };
+                var myChart = new Chart(
+                    document.getElementById('Home__Main'),
+                    config
+                );
+            })
+            vams('.Home__boxs').forEach((t) => {
+                t.classList.remove('loading')
+            })
+            vams('.Home__Main-wrap>div').forEach((t) => {
+                t.classList.remove('loading')
+            })
+        });
     })
 }
 // lấy dữ liệu học sinh
-var data = {}
+var data = []
 function loadstudent(callback) {
     fetchSheet
         .fetch({
@@ -295,6 +292,19 @@ function loadteacher(callback) {
         });
 }
 
+// lấy dữ liệu khách hàng chưa xử lý 
+function loadCustomer(callback) {
+    fetchSheet
+        .fetch({
+            gSheetId: '1seaoPDLCyGHanPFC78ovoaKqo9DMj-grSzNMDImFvwM',
+            wSheetName: 'Data Customer',
+        })
+        .then((rows) => {
+            data = rows
+            callback(data)
+        });
+}
+
 // lấy dữ liệu thiết bị
 function loaddevice(callback) {
     fetchSheet
@@ -307,3 +317,5 @@ function loaddevice(callback) {
             callback(data)
         });
 }
+
+console.log('Cảnh báo bảo mật');

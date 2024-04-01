@@ -1370,6 +1370,10 @@ table#example {
     animation: load 1s linear infinite;
 }
 
+.Home__boxs.loading>div {
+    border: none !important;
+}
+
 .Home__Main-wrap>div.loading::before,
 .giucho.loading {
     content: '';
