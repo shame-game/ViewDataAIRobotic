@@ -107,9 +107,17 @@ function HienStudent() {
                 else if (t.innerText == 'Chờ lên khóa') {
                     t.setAttribute('style', 'color:#fed45b')
                 }
+                else if (t.innerText == 'Nghỉ học') {
+                    t.setAttribute('style', 'color:#f15353')
+                }
             })
         });
-
+        vam('.detail__search>p').onclick = () => {
+            console.log('hello');
+            vams(`.student__detail`).forEach((t) => {
+                t.setAttribute('style', 'display:flex')
+            })
+        }
     })
 }
 // tìm kiếm thông tin học sinh
@@ -123,17 +131,16 @@ function searchData() {
         data = data.concat(t.getAttribute('data-name'))
         t.setAttribute('style', 'display:none')
     })
-    // Filter data based on search input
-    //const filteredData = data.filter(item => item.toLowerCase()) // item.toLowerCase().includes(searchInput));
     const filteredData = data.filter(item => removeAccents(item.toLowerCase()).includes(searchValue));
-
-    // Display filtered results
     filteredData.forEach(item => {
         vams(`.student__detail[data-name="${item}"]`).forEach((t) => {
             t.setAttribute('style', 'display:flex')
         })
     });
 }
+
+
+
 
 // Hiện thị trang chủ
 function HienTrangChu() {
@@ -209,7 +216,19 @@ function HienTrangChu() {
             };
             var doughnutChart = new Chart(document.getElementById('Home__Maind'), {
                 type: 'doughnut',
-                data: doughnutData
+                data: doughnutData,
+                options: {
+                    plugins: {
+                        datalabels: {
+                            color: 'black', // Màu của nhãn dữ liệu
+                            anchor: 'end', // Vị trí neo của nhãn dữ liệu
+                            align: 'top', // Sắp xếp của nhãn dữ liệu
+                            formatter: function (value, context) {
+                                return value; // Định dạng giá trị nhãn dữ liệu
+                            }
+                        }
+                    }
+                }
             });
         })
         loadstudent((callback) => {
@@ -248,7 +267,16 @@ function HienTrangChu() {
                                 stacked: true
                             }
                         },
-                        barPercentage: 0.5
+                        barPercentage: 0.5,
+                        plugins: {
+                            datalabels: {
+                                anchor: 'end',
+                                align: 'top',
+                                formatter: (value) => {
+                                    return value.toLocaleString();
+                                },
+                            }
+                        }
                     }
                 };
                 var myChart = new Chart(

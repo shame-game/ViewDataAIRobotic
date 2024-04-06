@@ -19,7 +19,7 @@ function pageStudent(callback) {
                             </div>
                         </div>
                     </div>
-                    <div class="Student__Main-wrap" style="margin-top: 1rem;flex:1">
+                    <div class="Student__Main-wrap" style="margin-top: 1rem;height: calc(100% - 5rem);">
                         <div class="loading student-detail" >
                             <div class="student__title">
                                 <a>STT</a>
@@ -29,7 +29,8 @@ function pageStudent(callback) {
                                 <a>Numbers</a>
                                 <a>Status</a>
                             </div>
-                            <div id="student__data">
+                            <div id="student__data" style="overflow: hidden;
+                            overflow-y: auto;">
                             </div>
                         </div>
                     </div>

@@ -854,6 +854,17 @@ body {
     border: 1px solid #ebecfe;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+}
+
+#student__data::-webkit-scrollbar {
+    background-color: white;
+    width: 0px;
+}
+
+.student__data::-webkit-scrollbar-thumb {
+    background-color: white;
+    width: 0px;
 }
 
 .student__title,
