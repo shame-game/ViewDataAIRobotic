@@ -94,7 +94,7 @@ function HienStudent() {
                     g = `<a>Chưa có</a>`
                 }
                 else {
-                    g = `<a href="${t.Status}">Xem thêm</a>`
+                    g = `<a target="_blank" href="${t.Profile}">Xem thêm</a>`
                 }
                 items +=
                     `<div class="student__detail" data-name="${t.Fullname}">
