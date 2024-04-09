@@ -28,6 +28,7 @@ function pageStudent(callback) {
                                 <a>Address</a>
                                 <a>Numbers</a>
                                 <a>Status</a>
+                                <a>Profile</a>
                             </div>
                             <div id="student__data" style="overflow: hidden;
                             overflow-y: auto;">

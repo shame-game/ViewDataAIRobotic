@@ -87,8 +87,15 @@ HienTrangChu()
 function HienStudent() {
     pageStudent(() => {
         loadstudent((callback) => {
-            let items = ''
+            let items = '';
+            let g = ''
             callback.forEach((t) => {
+                if (t['Profile'] == '') {
+                    g = `<a>Chưa có</a>`
+                }
+                else {
+                    g = `<a href="${t.Status}">Xem thêm</a>`
+                }
                 items +=
                     `<div class="student__detail" data-name="${t.Fullname}">
                         <a>${t.ID}</a>
@@ -97,6 +104,7 @@ function HienStudent() {
                         <a>${t.Address}</a>
                         <a>${t.Numbers}</a>
                         <a class="Student__status">${t.Status}</a>
+                        ${g}
                     </div>`
             })
             vam('#student__data').innerHTML = items
