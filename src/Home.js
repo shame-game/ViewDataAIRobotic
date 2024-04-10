@@ -62,7 +62,7 @@ function pageHome(callback) {
                                 </g>
                             </svg>
                             <h4 id="slclass">0</h4>
-                            <p>Class</p>
+                            <p>Lớp học</p>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-6 Home__boxs loading">
@@ -79,7 +79,7 @@ function pageHome(callback) {
                                 </g>
                             </svg>
                             <h4 id="slstudent">0</h4>
-                            <p>Student</p>
+                            <p>Học sinh</p>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-6 Home__boxs loading">
@@ -121,7 +121,7 @@ function pageHome(callback) {
                                 </g>
                             </svg>
                             <h4 id="slteacher">0</h4>
-                            <p>Teacher</p>
+                            <p>Giáo viên</p>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-6 Home__boxs loading">
@@ -141,7 +141,7 @@ function pageHome(callback) {
                                 </g>
                             </svg>
                             <h4 id="device">0</h4>
-                            <p>Device</p>
+                            <p>Thiết bị</p>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-6 Home__boxs loading">
@@ -169,7 +169,7 @@ function pageHome(callback) {
                                 </g>
                             </svg>
                             <h4 id="devicebroken">0</h4>
-                            <p>Broken</p>
+                            <p>Thiết bị hỏngn</p>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-6 Home__boxs loading">
@@ -200,22 +200,69 @@ function pageHome(callback) {
                                 </g>
                             </svg>
                             <h4 id="deviceloan">0</h4>
-                            <p>Loan</p>
+                            <p>Thiết bị cho mượn</p>
                         </div>
                     </div>
                 </div>
                 <div class="Home__Main row">
                     <div class="Home__Main-wrap col-lg-8">
                         <div class="loading">
-                            <div><h1>VISUAL STUDENT DATA</h1></div>
-                            <div class="canvas">
-                                <canvas id="Home__Main"></canvas>
-                            </div>
+                            <div><h1 style="font-weight: bold;text-transform: uppercase;">Dữ liệu mới và học sinh</h1></div>
+                            <div class="maindast">
+        <div>
+            <h1 style="display:flex;gap:1rem;margin:0px">Số data đã chăm sóc trong ngày: <p id="datadachamsoc"></p></h1>
+        </div>
+        <div class="mun">
+            <h1>Dữ liệu mới (ngày)</h1>
+            <div id="data-day">
+                <div>
+                    <div  style=""></div>
+                </div>
+                <h1></h1>
+            </div>
+        </div>
+        <div class="mun">
+            <h1>Dữ liệu mới (tuần)</h1>
+            <div id="data-week">
+                <div>
+                    <div style=""></div>
+                </div>
+                <h1></h1>
+            </div>
+        </div>
+        <div class="mun">
+            <h1>Học sinh mới (tuần)</h1>
+            <div id="data-student">
+                <div>
+                    <div style=""></div>
+                </div>
+                <h1></h1>
+            </div>
+        </div>
+        <div class="mun">
+            <h1>Chờ lên khóa</h1>
+            <div id="data-leverup">
+                <div>
+                    <div style=""></div>
+                </div>
+                <h1></h1>
+            </div>
+        </div>
+        <div class="mun">
+            <h1>Đã nghỉ học</h1>
+            <div id="data-out">
+                <div>
+                    <div style=""></div>
+                </div>
+                <h1>45 học sinh</h1>
+            </div>
+        </div>
+    </div>
                         </div>
                     </div>
                     <div class="Home__Main-wrap col-lg-4">
                         <div class="loading">
-                            <div><h1>DEVICE DATA</h1></div>
+                            <div><h1 style="font-weight: bold;text-transform: uppercase;">Dữ liệu thiết bị</h1></div>
                             <div class="canvas">
                                 <canvas id="Home__Maind"></canvas>
                             </div>

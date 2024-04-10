@@ -23,12 +23,12 @@ function pageStudent(callback) {
                         <div class="loading student-detail" >
                             <div class="student__title">
                                 <a>STT</a>
-                                <a>Name</a>
-                                <a>Class</a>
-                                <a>Address</a>
-                                <a>Numbers</a>
-                                <a>Status</a>
-                                <a>Profile</a>
+                                <a>Họ và tên</a>
+                                <a>Lớp</a>
+                                <a>Địa chỉ</a>
+                                <a>Số điện thoại</a>
+                                <a>Trạng thái</a>
+                                <a>Hồ sơ điện tử</a>
                             </div>
                             <div id="student__data" style="overflow: hidden;
                             overflow-y: auto;">

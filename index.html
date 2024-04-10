@@ -16,6 +16,37 @@
 </head>
 
 <body>
+  <div id="inforstudentdetail" style="display: none;"></div>
+  <div class="infordetail_wrap" style="display: none;">
+    <div class="infordetail_back-top"> </div>
+    <div class="infordetail_back-mid">
+      <div class="infordetail_back-mid__avt">
+        <img src="https://lh3.googleusercontent.com/d/1raB26KuCtKDTrg63Es4NRAREYPSW_pa3">
+      </div>
+      <div class="infordetail_back-mid__name">
+        <h1>Nguyễn Thiên Văn</h1>
+      </div>
+      <div class="infordetail_back-mid__bage">
+        <button>Bộ sưu tầm huy hiệu</button>
+      </div>
+    </div>
+    <div class="infordetail_back-bottom">
+      <div class="infordetail_back-bottom-wrap">
+        <div>
+          <p id="id_student">ID: AI0001</p>
+          <p id="class_student">Lớp: 24PR001</p>
+        </div>
+        <div>
+          <p id="parent_student">Phụ huynh: Nguyễn Nhật Khoa</p>
+          <p id="address_student">Địa chỉ: Biên Hòa, Đồng Nai</p>
+        </div>
+        <div>
+          <p id="email_student">Email: nhatkhoa13@gmail.com</p>
+          <p id="phone_student">Số điện thoại: 0833911374</p>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="loadweb">
     <div></div>
   </div>
@@ -43,8 +74,8 @@
     <div class="sidebar__container">
       <div class="sidebar">
         <div class="sidebar__items">
-          <a class="sidebar__item home sidebar__item--actived"><i class="bi bi-bar-chart-line-fill"></i>Overview</a>
-          <a class="sidebar__item student"><i class="bi bi-person-fill"></i>Student</a>
+          <a class="sidebar__item home sidebar__item--actived"><i class="bi bi-bar-chart-line-fill"></i>Tổng quan</a>
+          <a class="sidebar__item student"><i class="bi bi-person-fill"></i>Học sinh</a>
           <!--<a class="sidebar__item device"><i class="bi bi-robot"></i>Device</a>-->
         </div>
       </div>
@@ -59,7 +90,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
           </svg>
         </button>
-        <h3 class="topbar__title">Overview</h3>
+        <h3 class="topbar__title">Tổng quan</h3>
         <div class="topbar__right">
           <div class="avt">
             <img src="./src/image/avt.jpg">
@@ -85,7 +116,7 @@
   <script src="./src/Student.js"></script>
   <script>
     window.onload = () => {
-      vam('.loadweb').remove();
+      document.querySelector('.loadweb').remove();
     }
   </script>
   <script src="./src/index.js"></script>
