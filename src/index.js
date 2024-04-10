@@ -87,14 +87,7 @@ function HienStudent() {
         loadstudent((callback) => {
 
             let items = '';
-            let g = ''
             callback.forEach((t) => {
-                if (t['Profile'] == '') {
-                    g = `<a>Chưa có</a>`
-                }
-                else {
-                    g = `<a target="_blank" href="${t.Profile}">Xem thêm</a>`
-                }
                 if (t.ID != '') {
                     items +=
                         `<div class="student__detail" data-name="${t.Fullname}" data-id="${t[['ID']]}">
@@ -104,7 +97,6 @@ function HienStudent() {
                         <a>${t.Address}</a>
                         <a>${t.Numbers}</a>
                         <a class="Student__status">${t.Status}</a>
-                        ${g}
                     </div>`
                 }
             })
@@ -126,6 +118,7 @@ function HienStudent() {
                             vam('#address_student').innerText = 'Địa chỉ: ' + data['Address'];
                             vam('#email_student').innerText = 'Email: ' + data['Email'];
                             vam('#phone_student').innerText = 'Số điện thoại: ' + data['Numbers'];
+                            vam('#profile_student').setAttribute('href', `${data['Profile']}`)
                         }
                     })
                 }

@@ -28,7 +28,6 @@ function pageStudent(callback) {
                                 <a>Địa chỉ</a>
                                 <a>Số điện thoại</a>
                                 <a>Trạng thái</a>
-                                <a>Hồ sơ điện tử</a>
                             </div>
                             <div id="student__data" style="overflow: hidden;
                             overflow-y: auto;">

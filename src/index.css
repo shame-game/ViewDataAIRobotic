@@ -1836,19 +1836,25 @@ canvas {
 
 .infordetail_back-mid__bage {
     margin-left: auto;
+    display: flex;
+    align-items: start;
 }
 
-.infordetail_back-mid__bage>button {
+.infordetail_back-mid__bage>a {
     border: none;
     border-radius: 0 0 8px 8px;
     padding: .3rem 1rem;
     background-color: white;
     margin-top: -1px;
-    color: #979cff;
+    color: #979cff !important;
     transition: all .3s linear;
     outline: none;
+    font-size: 1.2rem;
+    text-decoration: none;
 }
 
-.infordetail_back-mid__bage>button:hover {
+.infordetail_back-mid__bage>a:hover {
     padding: .6rem 1rem;
+    cursor: pointer;
+    text-decoration: none !important;
 }
