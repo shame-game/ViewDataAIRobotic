@@ -169,7 +169,7 @@ function pageHome(callback) {
                                 </g>
                             </svg>
                             <h4 id="devicebroken">0</h4>
-                            <p>Thiết bị hỏngn</p>
+                            <p>Thiết bị hỏng</p>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 col-6 Home__boxs loading">
