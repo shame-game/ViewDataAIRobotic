@@ -1778,6 +1778,37 @@ canvas {
     z-index: 1001;
 }
 
+@media (max-width: 1400px) {
+    .infordetail_wrap {
+        width: 70%;
+    }
+}
+
+@media (max-width: 990px) {
+    .infordetail_wrap {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+
+    .infordetail_back-bottom {
+        height: 100%;
+    }
+
+    .infordetail_back-bottom-wrap {
+        height: 100%;
+    }
+
+    .infordetail_back-mid__name>h1 {
+        font-size: 1rem !important;
+    }
+
+    .infordetail_back-mid__bage>a {
+        font-size: 1rem !important;
+        width: max-content;
+    }
+}
+
 .infordetail_back-top {
     height: 50px;
     width: 100%;
