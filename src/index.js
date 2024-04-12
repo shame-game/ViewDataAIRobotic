@@ -133,7 +133,23 @@ function HienStudent() {
                             vam('#address_student').innerText = 'Địa chỉ: ' + data['Address'];
                             vam('#email_student').innerText = 'Email: ' + data['Email'];
                             vam('#phone_student').innerText = 'Số điện thoại: ' + data['Numbers'];
-                            vam('#profile_student').setAttribute('href', `${data['Profile']}`)
+
+                            async function kiemTraDuongDan(duongDan) {
+                                try {
+                                    const response = await fetch(duongDan);
+                                    vam('#profile_student').onclick = () => {
+                                        window.open(`${data['Profile']}`, '_blank');
+                                    }
+                                    if (!response.ok) {
+                                        vam('#profile_student').onclick = () => {
+                                            alert('Học sinh chưa có hồ sơ điện tử')
+                                        }
+                                    }
+                                } catch (error) {
+
+                                }
+                            }
+                            kiemTraDuongDan(`${data['Profile']}`);
                         }
                     })
 
@@ -256,11 +272,13 @@ function HienTrangChu() {
             let slteachers = 0;
             let teacherOB = {};
             dataclass.forEach((data) => {
-                if (teacherOB[data['ID']]) {
-                    teacherOB[data['ID']]++
-                }
-                else {
-                    teacherOB[data['ID']] = 1
+                if (data['ID'] != '') {
+                    if (teacherOB[data['ID']]) {
+                        teacherOB[data['ID']]++
+                    }
+                    else {
+                        teacherOB[data['ID']] = 1
+                    }
                 }
             })
             Object.keys(teacherOB).forEach(() => {

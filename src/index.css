@@ -1937,7 +1937,7 @@ canvas {
     align-items: start;
 }
 
-.infordetail_back-mid__bage>a {
+.infordetail_back-mid__bage>button {
     border: none;
     border-radius: 0 0 8px 8px;
     padding: .3rem 1rem;
@@ -1950,7 +1950,7 @@ canvas {
     text-decoration: none;
 }
 
-.infordetail_back-mid__bage>a:hover {
+.infordetail_back-mid__bage>button:hover {
     padding: .6rem 1rem;
     cursor: pointer;
     text-decoration: none !important;
