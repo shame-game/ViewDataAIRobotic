@@ -873,6 +873,19 @@ body {
     justify-content: space-between;
 }
 
+.student__detail {
+    display: none;
+}
+
+.student__detail.visi {
+    display: flex;
+}
+
+.student__detail.search {
+    display: none;
+}
+
+
 .student__title>a:nth-child(1),
 .student__detail>a:nth-child(1) {
     text-align: center;
@@ -1807,6 +1820,59 @@ canvas {
         font-size: 1rem !important;
         width: max-content;
     }
+}
+
+.chonlop {
+    height: 2.5rem !important;
+    background-color: #ebecfe;
+    border: none;
+    border-radius: 8px;
+    padding: 0 1rem;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.chonlop:hover .danhsachlop {
+    visibility: visible;
+}
+
+.danhsachlop {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 8px;
+    padding: .5rem;
+    visibility: hidden;
+    max-height: 300px;
+    transition: all .5s linear;
+}
+
+.danhsachlop>div {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.danhsachlop>div>p {
+    text-align: center;
+    margin: 0;
+    padding: .5rem;
+    border-radius: 10px;
+}
+
+.danhsachlop>div>p:hover {
+    background-color: #ebecfe;
+}
+
+.chonlop>button {
+    background-color: #ebecfe;
+    border: none;
+    outline: none;
 }
 
 .infordetail_back-top {

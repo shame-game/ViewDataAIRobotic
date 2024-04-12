@@ -73,8 +73,8 @@ else {
             // vam('.device').innerHTML = '<i class="bi bi-robot"></i>';
         } else {
             vam('#Logo_a').src = './src/image/Logo.png';
-            vam('.home').innerHTML = '<i class="bi bi-bar-chart-line-fill"></i>Overview';
-            vam('.student').innerHTML = '<i class="bi bi-person-fill"></i>Student';
+            vam('.home').innerHTML = '<i class="bi bi-bar-chart-line-fill"></i>Tổng quan';
+            vam('.student').innerHTML = '<i class="bi bi-person-fill"></i>Học sinh';
             // vam('.device').innerHTML = '<i class="bi bi-robot"></i>Device';
         }
     });
@@ -85,12 +85,27 @@ HienTrangChu()
 function HienStudent() {
     pageStudent(() => {
         loadstudent((callback) => {
-
+            let danhsachlop = '<p>Tất cả lớp</p>';
             let items = '';
+            let teacher = {};
+            callback.forEach((data) => {
+                if (data['Class'] != '') {
+                    if (teacher[data['Class']]) {
+                        teacher[data['Class']]++
+                    }
+                    else {
+                        teacher[data['Class']] = 1
+                    }
+                }
+            })
+            Object.keys(teacher).forEach((key) => {
+                danhsachlop += `<p>${key}</p>`
+            })
+            vam('.danhsachlop>div').innerHTML = danhsachlop
             callback.forEach((t) => {
                 if (t.ID != '') {
                     items +=
-                        `<div class="student__detail" data-name="${t.Fullname}" data-id="${t[['ID']]}">
+                        `<div class="student__detail visi" data-name="${t.Fullname}" data-id="${t[['ID']]}" data-class="${t['Class']}">
                         <a>${t.ID}</a>
                         <a>${t.Fullname}</a>
                         <a>${t.Class}</a>
@@ -121,6 +136,7 @@ function HienStudent() {
                             vam('#profile_student').setAttribute('href', `${data['Profile']}`)
                         }
                     })
+
                 }
             })
             vams('.Student__status').forEach((t) => {
@@ -134,12 +150,46 @@ function HienStudent() {
                     t.setAttribute('style', 'color:#f15353')
                 }
             })
+            vams('.danhsachlop>div>p').forEach((t) => {
+                t.onclick = () => {
+                    vam('.chonlop>button').innerText = t.innerText;
+                    if (t.innerText == 'Tất cả lớp') {
+                        vams('.student__detail').forEach((f) => {
+                            if (f.getAttribute('class').includes("search") == true) {
+                                f.classList.remove('search')
+                            }
+                            f.classList.add('visi')
+                        })
+                    }
+                    else {
+                        vams('.student__detail').forEach((f) => {
+                            if (f.getAttribute('class').includes("visi") == true) {
+                                f.classList.remove('visi')
+                            }
+                            if (f.getAttribute('class').includes("search") == true) {
+                                f.classList.remove('search')
+                            }
+                            let g = f.getAttribute('data-class')
+                            if (g == t.innerText) {
+                                f.classList.add('visi')
+                            }
+                        })
+                    }
+                }
+            })
         });
         vam('.detail__search>p').onclick = () => {
-            vams(`.student__detail`).forEach((t) => {
-                t.setAttribute('style', 'display:flex')
+            vams(`.student__detail.visi`).forEach((t) => {
+                if (t.getAttribute('class').includes("search") == true) {
+                    t.classList.remove('search')
+                }
             })
         }
+        vam('.chonlop').onclick = () => {
+            vam('.danhsachlop').classList.toggle('hide')
+        }
+
+
     })
 }
 // tìm kiếm thông tin học sinh
@@ -149,14 +199,14 @@ function removeAccents(str) {
 function searchData() {
     const searchValue = removeAccents(document.querySelector("#SearchStudent").value.toLowerCase());
     let data = [];
-    vams('.student__detail').forEach((t) => {
+    vams(`.student__detail.visi`).forEach((t) => {
         data = data.concat(t.getAttribute('data-name'))
-        t.setAttribute('style', 'display:none')
+        t.classList.add('search')
     })
     const filteredData = data.filter(item => removeAccents(item.toLowerCase()).includes(searchValue));
     filteredData.forEach(item => {
-        vams(`.student__detail[data-name="${item}"]`).forEach((t) => {
-            t.setAttribute('style', 'display:flex')
+        vams(`.student__detail.search[data-name="${item}"]`).forEach((t) => {
+            t.classList.remove('search')
         })
     });
 }
@@ -187,11 +237,13 @@ function HienTrangChu() {
             let slclasss = 0;
             let classOB = {};
             dataclass.forEach((data) => {
-                if (classOB[data['Class']]) {
-                    classOB[data['Class']]++
-                }
-                else {
-                    classOB[data['Class']] = 1
+                if (data['Class'] != '') {
+                    if (classOB[data['Class']]) {
+                        classOB[data['Class']]++
+                    }
+                    else {
+                        classOB[data['Class']] = 1
+                    }
                 }
             })
             Object.keys(classOB).forEach(() => {

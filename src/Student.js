@@ -6,12 +6,18 @@ function pageStudent(callback) {
                 <div class="Student__Main">
                     <div class="Student__Main-wrap">
                         <div class="loading title">
-                            <div style="display: flex;
-                            height: 100%;align-items: center;">
-                                <p style="margin:0">Dashboard ● Student</p>
+                            <div class="chonlop">
+                                <button>Tất cả lớp</button>
+                                <i class="bi bi-caret-down-fill"></i>
+                                <div class="danhsachlop">   
+                                    <div>
+                                        
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="detail__search">
-                                <input type="search" onkeyup="searchData()" placeholder="Seacrh By Name" id="SearchStudent">
+                                <input type="search" onkeyup="searchData()" placeholder="Tìm kiếm bằng tên" id="SearchStudent">
                                     <button id="search" class="">
                                         <i class="bi bi-search"></i>
                                     </button>
