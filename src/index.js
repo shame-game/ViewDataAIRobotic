@@ -40,6 +40,30 @@ vam('.sidebar__item.student').onclick = () => {
         })
     }
 }
+vam('.sidebar__item.data').onclick = () => {
+    if (vam('.sidebar__item--actived.data') == null) {
+        if (wid < 1100) {
+            document.querySelector('.bg.hide').classList.remove('hide')
+            $('.account__container').toggleClass('hiden')
+            $('.sidebar__container').toggleClass('hiden')
+        }
+        vam('.sidebar__item--actived.sidebar__item').classList.remove('sidebar__item--actived');
+        vam('.sidebar__item.data').classList.add('sidebar__item--actived')
+        vam('#main').innerHTML = ''
+        vam('.topbar__title').innerText = 'Dữ liệu'
+        HienData()
+        vam('#search').addEventListener('click', () => {
+            vam('.detail__search>input').classList.add('hide')
+            vam('.detail__search>button').classList.add('hiden')
+            vam('.detail__search>input').value = ''
+            vam('.detail__search p').addEventListener('click', () => {
+                vam('.detail__search>input').classList.remove('hide')
+                vam('.detail__search>button').classList.remove('hiden')
+                vam('.detail__search>input').value = ''
+            })
+        })
+    }
+}
 
 
 // điều khiển menu
@@ -70,12 +94,14 @@ else {
             vam('#Logo_a').src = './src/image/Logomini.png';
             vam('.home').innerHTML = '<i class="bi bi-bar-chart-line-fill"></i>';
             vam('.student').innerHTML = '<i class="bi bi-person-fill"></i>';
-            // vam('.device').innerHTML = '<i class="bi bi-robot"></i>';
+            vam('.teacher').innerHTML = '<i class="bi bi-robot"></i>';
+            vam('.data').innerHTML = '<i class="bi bi-robot"></i>';
         } else {
             vam('#Logo_a').src = './src/image/Logo.png';
             vam('.home').innerHTML = '<i class="bi bi-bar-chart-line-fill"></i>Tổng quan';
             vam('.student').innerHTML = '<i class="bi bi-person-fill"></i>Học sinh';
-            // vam('.device').innerHTML = '<i class="bi bi-robot"></i>Device';
+            vam('.teacher').innerHTML = '<i class="bi bi-robot"></i>Giáo viên';
+            vam('.data').innerHTML = '<i class="bi bi-robot"></i>Dữ liệu';
         }
     });
 }
@@ -227,7 +253,6 @@ function searchData() {
     });
 }
 
-
 // Hiện thị trang chủ
 function HienTrangChu() {
     pageHome(() => {
@@ -342,6 +367,107 @@ function HienTrangChu() {
         });
     })
 }
+
+// Hiện thị trang chủ
+function HienData() {
+    pageData(() => {
+        loaddatacs((callback) => {
+            let itemsday = ""
+            let itemsw = ""
+            let itemsm = ""
+            callback.forEach((t) => {
+                let g = '';
+                let p = '';
+
+                if (t.ByDay != '') {
+                    if (t.StatusD == '0') {
+                        g = 'Từ chối tham gia';
+                        p = '#ff4f4f'
+                    }
+                    else if (t.StatusD == '') {
+                        g = 'Chưa chăm sóc'
+                        p = '#f0ff50'
+                    }
+                    else if (t.StatusD == '1') {
+                        g = 'Đồng ý tham gia'
+                        p = '#08c222'
+                    }
+                    else if (t.StatusD == '2') {
+                        g = 'Trường hợp khác'
+                        p = '#508bff'
+                    }
+                    itemsday +=
+                        `<div class="data__detail visi">
+                        <a>${t.ByDay}</a>
+                        <a>${t.ParentName}</a>
+                        <a style="color:${p}">${g}</a>
+                    </div>`
+                }
+                if (t.ByWeek != '') {
+                    if (t.StatusW == '0') {
+                        g = 'Từ chối tham gia';
+                        p = '#ff4f4f'
+                    }
+                    else if (t.StatusW == '') {
+                        g = 'Chưa chăm sóc'
+                        p = '#f0ff50'
+                    }
+                    else if (t.StatusW == '1') {
+                        g = 'Đồng ý tham gia'
+                        p = '#08c222'
+                    }
+                    else if (t.StatusW == '2') {
+                        g = 'Trường hợp khác'
+                        p = '#508bff'
+                    }
+                    itemsw +=
+                        `<div class="data__detail visi">
+                            <a>${t.ByWeek}</a>
+                            <a>${t.ParentNameW}</a>
+                            <a style="color:${p}">${g}</a>
+                        </div>`
+                }
+                if (t.ByMonth != '') {
+                    if (t.StatusM == '0') {
+                        g = 'Từ chối tham gia';
+                        p = '#ff4f4f'
+                    }
+                    else if (t.StatusM == '') {
+                        g = 'Chưa chăm sóc'
+                        p = '#f0ff50'
+                    }
+                    else if (t.StatusM == '1') {
+                        g = 'Đồng ý tham gia'
+                        p = '#08c222'
+                    }
+                    else if (t.StatusM == '2') {
+                        g = 'Trường hợp khác'
+                        p = '#508bff'
+                    }
+                    itemsm +=
+                        `<div class="data__detail visi">
+                            <a>${t.ByMonth}</a>
+                            <a>${t.ParentNameM}</a>
+                            <a style="color:${p}">${g}</a>
+                        </div>`
+                }
+            })
+            vam('#Data__data').innerHTML = itemsday;
+            vam('.datacs_d').onclick = () => {
+                vam('#Data__data').innerHTML = itemsday;
+                vam('.chonlop>button').innerText = 'Dữ liệu chăm sóc trong ngày'
+            }
+            vam('.datacs_w').onclick = () => {
+                vam('#Data__data').innerHTML = itemsw;
+                vam('.chonlop>button').innerText = 'Dữ liệu chăm sóc trong tuần'
+            }
+            vam('.datacs_m').onclick = () => {
+                vam('#Data__data').innerHTML = itemsm;
+                vam('.chonlop>button').innerText = 'Dữ liệu chăm sóc trong tháng'
+            }
+        })
+    })
+}
 // lấy dữ liệu học sinh
 var data = []
 function loadstudent(callback) {
@@ -388,6 +514,18 @@ function loaddevice(callback) {
         .fetch({
             gSheetId: '1seaoPDLCyGHanPFC78ovoaKqo9DMj-grSzNMDImFvwM',
             wSheetName: 'Data device',
+        })
+        .then((rows) => {
+            data = rows
+            callback(data)
+        });
+}
+
+function loaddatacs(callback) {
+    fetchSheet
+        .fetch({
+            gSheetId: '1seaoPDLCyGHanPFC78ovoaKqo9DMj-grSzNMDImFvwM',
+            wSheetName: 'DataIsSupported',
         })
         .then((rows) => {
             data = rows
