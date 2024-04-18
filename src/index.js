@@ -373,9 +373,9 @@ function HienData() {
     pageData(() => {
         loaddatacs((callback) => {
             var currentDate = new Date();
-            var currentMonth = currentDate.getMonth();
+            var currentMonth = currentDate.getDay();
             currentMonth += 1;
-            vam('#content_slcs').innerText = 'Dữ liệu chăm sóc khách hàng tháng ' + currentMonth
+            vam('#content_slcs').innerText = 'Dữ liệu chăm sóc khách hàng ngày hôm nay'
             let itemsday = ""
             let itemsw = ""
             let itemsm = ""
@@ -384,17 +384,17 @@ function HienData() {
             let cd = 0
             let kd = 0
             callback.forEach((data) => {
-                if (data['ByMonth'] != '') {
-                    if (data['StatusM'] == '') {
+                if (data['ByDay'] != '') {
+                    if (data['StatusD'] == '') {
                         cd++
                     }
-                    else if (data['StatusM'] == 1) {
+                    else if (data['StatusD'] == 1) {
                         dyd++
                     }
-                    else if (data['StatusM'] == 2) {
+                    else if (data['StatusD'] == 2) {
                         kd++
                     }
-                    else if (data['StatusM'] == 0) {
+                    else if (data['StatusD'] == 0) {
                         tcd++
                     }
                 }
