@@ -8,7 +8,7 @@ function pageData(callback) {
                             <div class="chonlop">
                                 <button>Dữ liệu chăm sóc trong ngày</button>
                                 <i class="bi bi-caret-down-fill"></i>
-                                <div class="danhsachdulieu">   
+                                <div class="danhsachdulieu" style="z-index:999">   
                                     <div>
                                     <p class="datacs_d">Dữ liệu chăm sóc trong ngày</p>
                                     <p class="datacs_w">Dữ liệu chăm sóc trong tuần</p>
@@ -18,8 +18,8 @@ function pageData(callback) {
                             </div>
                         </div>
                     </div>
-                    <div class="Data__Main-wrap" style="margin-top: 1rem;height: calc(100% - 5rem);">
-                        <div class="loading Data-detail" >
+                    <div class="Data__Main-wrap row" style="justify-content: space-between;margin:0;margin-top: 1rem;height: calc(100% - 5rem);">
+                        <div class="loading Data-detail col-lg-8" >
                             <div class="data__title">
                                 <a>SĐT</a>
                                 <a>Tên Phụ Huynh</a>
@@ -28,6 +28,15 @@ function pageData(callback) {
                             <div id="Data__data" style="overflow: hidden;
                             overflow-y: auto;">
                             </div>
+                        </div>
+                        <div class=" col-lg-4" style="padding-right:0" >
+                        <div class="loading Data-detail">
+                        <div class="data__title">
+                       <a id="content_slcs">Dữ liệu chăm sóc</a> 
+                    </div>
+                    <div id="Data__data" style="overflow: hidden;flex: 1;display: flex;align-items: center;"><canvas id="Data-chamsoc"></canvas>
+                    </div>
+                        </div>
                         </div>
                     </div>
                 </div>

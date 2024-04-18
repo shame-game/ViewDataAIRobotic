@@ -372,9 +372,35 @@ function HienTrangChu() {
 function HienData() {
     pageData(() => {
         loaddatacs((callback) => {
+            var currentDate = new Date();
+            var currentMonth = currentDate.getMonth();
+            currentMonth += 1;
+            vam('#content_slcs').innerText = 'Dữ liệu chăm sóc khách hàng tháng ' + currentMonth
             let itemsday = ""
             let itemsw = ""
             let itemsm = ""
+            let dyd = 0
+            let tcd = 0
+            let cd = 0
+            let kd = 0
+            callback.forEach((data) => {
+                if (data['ByMonth'] != '') {
+                    if (data['StatusM'] == '') {
+                        cd++
+                    }
+                    else if (data['StatusM'] == 1) {
+                        dyd++
+                    }
+                    else if (data['StatusM'] == 2) {
+                        kd++
+                    }
+                    else if (data['StatusM'] == 0) {
+                        tcd++
+                    }
+                }
+            })
+            let datad = [tcd, cd, dyd, kd]
+
             callback.forEach((t) => {
                 let g = '';
                 let p = '';
@@ -386,14 +412,14 @@ function HienData() {
                     }
                     else if (t.StatusD == '') {
                         g = 'Chưa chăm sóc'
-                        p = '#f0ff50'
+                        p = '#ffdd00'
                     }
                     else if (t.StatusD == '1') {
                         g = 'Đồng ý tham gia'
                         p = '#08c222'
                     }
                     else if (t.StatusD == '2') {
-                        g = 'Trường hợp khác'
+                        g = 'Đang chăm sóc'
                         p = '#508bff'
                     }
                     itemsday +=
@@ -402,6 +428,8 @@ function HienData() {
                         <a>${t.ParentName}</a>
                         <a style="color:${p}">${g}</a>
                     </div>`
+
+
                 }
                 if (t.ByWeek != '') {
                     if (t.StatusW == '0') {
@@ -410,14 +438,14 @@ function HienData() {
                     }
                     else if (t.StatusW == '') {
                         g = 'Chưa chăm sóc'
-                        p = '#f0ff50'
+                        p = '#ffdd00'
                     }
                     else if (t.StatusW == '1') {
                         g = 'Đồng ý tham gia'
                         p = '#08c222'
                     }
                     else if (t.StatusW == '2') {
-                        g = 'Trường hợp khác'
+                        g = 'Đang chăm sóc'
                         p = '#508bff'
                     }
                     itemsw +=
@@ -434,14 +462,14 @@ function HienData() {
                     }
                     else if (t.StatusM == '') {
                         g = 'Chưa chăm sóc'
-                        p = '#f0ff50'
+                        p = '#ffdd00'
                     }
                     else if (t.StatusM == '1') {
                         g = 'Đồng ý tham gia'
                         p = '#08c222'
                     }
                     else if (t.StatusM == '2') {
-                        g = 'Trường hợp khác'
+                        g = 'Đang chăm sóc'
                         p = '#508bff'
                     }
                     itemsm +=
@@ -451,11 +479,41 @@ function HienData() {
                             <a style="color:${p}">${g}</a>
                         </div>`
                 }
+
             })
+            var datam = {
+                labels: ['Từ chối tham gia', 'Chưa chăm sóc', 'Đồng ý tham gia', 'Đang chăm sóc'],
+                datasets: [{
+                    label: 'Number of equipment',
+                    data: datad,
+                    backgroundColor: [
+                        '#ff4f4f',
+                        '#f0ff50',
+                        '#08c222',
+                        '#508bff',
+                    ]
+                }]
+            };
+            var doughnut = new Chart(document.getElementById('Data-chamsoc'), {
+                type: 'doughnut',
+                data: datam,
+                options: {
+                    plugins: {
+                        datalabels: {
+                            color: 'black', // Màu của nhãn dữ liệu
+                            anchor: 'end', // Vị trí neo của nhãn dữ liệu
+                            align: 'top', // Sắp xếp của nhãn dữ liệu
+                            formatter: function (value, context) {
+                                return value; // Định dạng giá trị nhãn dữ liệu
+                            }
+                        }
+                    }
+                }
+            });
             vam('#Data__data').innerHTML = itemsday;
             vam('.datacs_d').onclick = () => {
                 vam('#Data__data').innerHTML = itemsday;
-                vam('.chonlop>button').innerText = 'Dữ liệu chăm sóc trong ngày'
+                vam('.chonlop>button').innerText = 'Dữ liệu chăm sóc trong ngày';
             }
             vam('.datacs_w').onclick = () => {
                 vam('#Data__data').innerHTML = itemsw;
@@ -465,6 +523,7 @@ function HienData() {
                 vam('#Data__data').innerHTML = itemsm;
                 vam('.chonlop>button').innerText = 'Dữ liệu chăm sóc trong tháng'
             }
+
         })
     })
 }
