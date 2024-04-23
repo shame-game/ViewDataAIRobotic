@@ -94,14 +94,15 @@ else {
             vam('#Logo_a').src = './src/image/Logomini.png';
             vam('.home').innerHTML = '<i class="bi bi-bar-chart-line-fill"></i>';
             vam('.student').innerHTML = '<i class="bi bi-person-fill"></i>';
-            vam('.teacher').innerHTML = '<i class="bi bi-robot"></i>';
             vam('.data').innerHTML = '<i class="bi bi-robot"></i>';
+
         } else {
             vam('#Logo_a').src = './src/image/Logo.png';
-            vam('.home').innerHTML = '<i class="bi bi-bar-chart-line-fill"></i>Tổng quan';
-            vam('.student').innerHTML = '<i class="bi bi-person-fill"></i>Học sinh';
-            vam('.teacher').innerHTML = '<i class="bi bi-robot"></i>Giáo viên';
-            vam('.data').innerHTML = '<i class="bi bi-robot"></i>Dữ liệu';
+            setTimeout(() => {
+                vam('.home').innerHTML = '<i class="bi bi-bar-chart-line-fill"></i>Tổng quan';
+                vam('.student').innerHTML = '<i class="bi bi-person-fill"></i>Học sinh';
+                vam('.data').innerHTML = '<i class="bi bi-robot"></i>Dữ liệu';
+            }, 200)
         }
     });
 }
