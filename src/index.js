@@ -256,6 +256,41 @@ function searchData() {
 
 // Hiện thị trang chủ
 function HienTrangChu() {
+
+    loaddatacs((callback) => {
+        let i = 0
+        let dlmd = 0
+        let undlmd = 0
+        let dlmm = 0
+        let undlmm = 0
+        callback.forEach((t) => {
+            if (date.slice(-2) == t.Date.slice(0, 2) && date.slice(5, -3) == t.Date.slice(3, 5) && date.slice(0, 4) == t.Date.slice(6, 10)) {
+                if (t.StatusD != '') {
+                    dlmd++
+                } else {
+                    undlmd++
+                }
+            }
+            if (date.slice(5, -3) == t.Date.slice(3, 5) && date.slice(0, 4) == t.Date.slice(6, 10)) {
+                if (t.StatusD == '1') {
+                    i++
+                }
+                if (t.StatusD != '') {
+                    dlmm++
+                }
+                if (t.StatusD == '') {
+                    undlmm++
+                }
+            }
+        })
+        console.log(dlmm, undlmm);
+        vam('#datadachamsoc').innerHTML = i;
+        vam('#data-day>h1').innerHTML = dlmd + ' Dữ liệu / hôm nay';
+        vam('#data-day>div>div').setAttribute('style', `width:${(undlmd + dlmd) / dlmd * 100}%`);
+        vam('#data-week>h1').innerHTML = dlmm + ` Dữ liệu / tháng ${date.slice(5, -3)}`;
+        vam('#data-week>div>div').setAttribute('style', `width:${(undlmm + dlmm) / dlmm * 100}%`);
+    })
+
     pageHome(() => {
         loadstudent((callback) => {
             // datastudent
@@ -349,11 +384,9 @@ function HienTrangChu() {
         })
         loadstudent((callback) => {
             loadCustomer((callbackd) => {
-                vam('#datadachamsoc').innerHTML = callbackd[0]['DataIsSupported'];
-                vam('#data-day>h1').innerHTML = callbackd[0]['data (day)'] + ' Dữ liệu mới /ngày';
-                vam('#data-day>div>div').setAttribute('style', `width:${callbackd[0]['data (day)'] / callbackd[0]['KPI data (day)'] * 100}%`);
-                vam('#data-week>h1').innerHTML = callbackd[0]['data (week)'] + ' Dữ liệu mới /tuần';
-                vam('#data-week>div>div').setAttribute('style', `width:${callbackd[0]['data (week)'] / callbackd[0]['KPI data (week)'] * 100}%`);
+
+
+
                 vam('#data-student>h1').innerHTML = callback[0]['New student (week)'] + ' Học sinh mới /tuần';
                 vam('#data-student>div>div').setAttribute('style', `width:${callback[0]['New student (week)'] / callback[0]['KPI New student (week)'] * 100}%`);
                 vam('#data-leverup>h1').innerHTML = callback[0]['Waiting To Level Up'] + ' Học sinh chờ lên khóa';
@@ -368,45 +401,56 @@ function HienTrangChu() {
         });
     })
 }
+var f = 0
 
-// Hiện thị trang chủ
+
+
+// Hiện thị data
 function HienData() {
     pageData(() => {
         loaddatacs((callback) => {
-            var currentDate = new Date();
-            var currentMonth = currentDate.getDay();
-            currentMonth += 1;
-            vam('#content_slcs').innerText = 'Dữ liệu chăm sóc khách hàng ngày hôm nay'
-            let itemsday = ""
-            let itemsw = ""
-            let itemsm = ""
+            let itemsdaychange = ''
             let dyd = 0
             let tcd = 0
+            let tcs = 0
             let cd = 0
             let kd = 0
-            callback.forEach((data) => {
-                if (data['ByDay'] != '') {
-                    if (data['StatusD'] == '') {
+            callback.forEach((t) => {
+                if (vam('#date_dsdl').value.slice(-2) == t.Date.slice(0, 2) && vam('#date_dsdl').value.slice(5, -3) == t.Date.slice(3, 5) && vam('#date_dsdl').value.slice(0, 4) == t.Date.slice(6, 10)) {
+
+                    if (t['StatusD'] == '') {
                         cd++
                     }
-                    else if (data['StatusD'] == 1) {
+                    else if (t['StatusD'] == 1) {
                         dyd++
                     }
-                    else if (data['StatusD'] == 2) {
+                    else if (t['StatusD'] == 2) {
                         kd++
                     }
-                    else if (data['StatusD'] == 0) {
+                    else if (t['StatusD'] == 0) {
                         tcd++
+                    }
+                    else if (t['StatusD'] == 3) {
+                        tcs++
                     }
                 }
             })
-            let datad = [tcd, cd, dyd, kd]
-
-            callback.forEach((t) => {
-                let g = '';
-                let p = '';
-
-                if (t.ByDay != '') {
+            // In ra danh sách khách hàng đã đưa vào danh sách chăm sóc
+            let f = 0
+            let k = 0
+            let j = 0
+            let h = 0
+            let l = 0
+            function Indanhsach() {
+                f = 0
+                k = 0
+                j = 0
+                h = 0
+                l = 0
+                itemsdaychange = ''
+                callback.forEach((t) => {
+                    let g = '';
+                    let p = '';
                     if (t.StatusD == '0') {
                         g = 'Từ chối tham gia';
                         p = '#ff4f4f'
@@ -423,67 +467,90 @@ function HienData() {
                         g = 'Đang chăm sóc'
                         p = '#508bff'
                     }
-                    itemsday +=
-                        `<div class="data__detail visi">
-                        <a>${t.ByDay}</a>
-                        <a>${t.ParentName}</a>
-                        <a style="color:${p}">${g}</a>
-                    </div>`
+                    else if (t.StatusD == '3') {
+                        g = 'Tái chăm sóc'
+                        p = '#ff08ce'
+                    }
 
+                    if (vam('#date_dsdl').value.slice(-2) == t.Date.slice(0, 2) && vam('#date_dsdl').value.slice(5, -3) == t.Date.slice(3, 5) && vam('#date_dsdl').value.slice(0, 4) == t.Date.slice(6, 10)) {
+                        itemsdaychange +=
+                            `<div class="data__detail visi">
+                                <a>${t.Phone}</a>
+                                <a>${t.ParentName}</a>
+                                <a style="color:${p}">${g}</a>
+                                <a>${t['Date']}</a>
+                            </div>`
+                        if (t['StatusD'] == '') {
+                            k++
+                        }
+                        else if (t['StatusD'] == 1) {
+                            h++
+                        }
+                        else if (t['StatusD'] == 2) {
+                            j++
+                        }
+                        else if (t['StatusD'] == 0) {
+                            f++
+                        }
+                        else if (t['StatusD'] == 3) {
+                            l++
+                        }
+                        vam('#content_slcs').innerText = `Dữ liệu chăm sóc khách hàng ngày ${t.Date}`
+                    }
 
-                }
-                if (t.ByWeek != '') {
-                    if (t.StatusW == '0') {
-                        g = 'Từ chối tham gia';
-                        p = '#ff4f4f'
-                    }
-                    else if (t.StatusW == '') {
-                        g = 'Chưa chăm sóc'
-                        p = '#ffdd00'
-                    }
-                    else if (t.StatusW == '1') {
-                        g = 'Đồng ý tham gia'
-                        p = '#08c222'
-                    }
-                    else if (t.StatusW == '2') {
-                        g = 'Đang chăm sóc'
-                        p = '#508bff'
-                    }
-                    itemsw +=
-                        `<div class="data__detail visi">
-                            <a>${t.ByWeek}</a>
-                            <a>${t.ParentNameW}</a>
-                            <a style="color:${p}">${g}</a>
+                })
+                if (itemsdaychange == '') {
+                    vam('#Data__data').innerHTML =
+                        `<div style="display: flex;
+                        justify-content: center;
+                        flex-direction: column;
+                        align-items: center;user-select: none;">
+                            <img style="width:50%" src="https://lh3.googleusercontent.com/d/1xHrdpQSibXvM8dinGovhKazmKCFM5WmD"/>
+                            <p style="text-align:center">Không có dữ liệu chăm sóc trong hôm nay</p>
                         </div>`
+                } else {
+                    vam('#Data__data').innerHTML = itemsdaychange
                 }
-                if (t.ByMonth != '') {
-                    if (t.StatusM == '0') {
-                        g = 'Từ chối tham gia';
-                        p = '#ff4f4f'
-                    }
-                    else if (t.StatusM == '') {
-                        g = 'Chưa chăm sóc'
-                        p = '#ffdd00'
-                    }
-                    else if (t.StatusM == '1') {
-                        g = 'Đồng ý tham gia'
-                        p = '#08c222'
-                    }
-                    else if (t.StatusM == '2') {
-                        g = 'Đang chăm sóc'
-                        p = '#508bff'
-                    }
-                    itemsm +=
-                        `<div class="data__detail visi">
-                            <a>${t.ByMonth}</a>
-                            <a>${t.ParentNameM}</a>
-                            <a style="color:${p}">${g}</a>
-                        </div>`
-                }
+                return f
 
-            })
+            }
+            vam('#date_dsdl').onchange = () => {
+                Indanhsach()
+                doughnut.destroy();
+                doughnut = new Chart(document.getElementById('Data-chamsoc'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Từ chối tham gia', 'Chưa chăm sóc', 'Đồng ý tham gia', 'Đang chăm sóc', 'Tái chăm sóc'],
+                        datasets: [{
+                            label: 'Number of equipment',
+                            data: [f, k, h, j, l],
+                            backgroundColor: [
+                                '#ff4f4f',
+                                '#f0ff50',
+                                '#08c222',
+                                '#508bff',
+                                '#ff08ce'
+                            ]
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            datalabels: {
+                                color: 'black', // Màu của nhãn dữ liệu
+                                anchor: 'end', // Vị trí neo của nhãn dữ liệu
+                                align: 'top', // Sắp xếp của nhãn dữ liệu
+                                formatter: function (value, context) {
+                                    return value; // Định dạng giá trị nhãn dữ liệu
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            Indanhsach()
+            let datad = [tcd, cd, dyd, kd, tcs]
             var datam = {
-                labels: ['Từ chối tham gia', 'Chưa chăm sóc', 'Đồng ý tham gia', 'Đang chăm sóc'],
+                labels: ['Từ chối tham gia', 'Chưa chăm sóc', 'Đồng ý tham gia', 'Đang chăm sóc', 'Tái chăm sóc'],
                 datasets: [{
                     label: 'Number of equipment',
                     data: datad,
@@ -492,6 +559,7 @@ function HienData() {
                         '#f0ff50',
                         '#08c222',
                         '#508bff',
+                        '#ff08ce'
                     ]
                 }]
             };
@@ -511,20 +579,6 @@ function HienData() {
                     }
                 }
             });
-            vam('#Data__data').innerHTML = itemsday;
-            vam('.datacs_d').onclick = () => {
-                vam('#Data__data').innerHTML = itemsday;
-                vam('.chonlop>button').innerText = 'Dữ liệu chăm sóc trong ngày';
-            }
-            vam('.datacs_w').onclick = () => {
-                vam('#Data__data').innerHTML = itemsw;
-                vam('.chonlop>button').innerText = 'Dữ liệu chăm sóc trong tuần'
-            }
-            vam('.datacs_m').onclick = () => {
-                vam('#Data__data').innerHTML = itemsm;
-                vam('.chonlop>button').innerText = 'Dữ liệu chăm sóc trong tháng'
-            }
-
         })
     })
 }

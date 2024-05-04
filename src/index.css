@@ -1856,13 +1856,10 @@ canvas {
     visibility: visible;
 }
 
-.chonlop:hover .danhsachdulieu {
-    visibility: visible;
-}
 
 
-.danhsachlop,
-.danhsachdulieu {
+
+.danhsachlop {
     position: absolute;
     top: 100%;
     width: 100%;
@@ -1876,22 +1873,19 @@ canvas {
     transition: all .5s linear;
 }
 
-.danhsachlop>div,
-.danhsachdulieu>div {
+.danhsachlop>div {
     height: 100%;
     overflow-y: auto;
 }
 
-.danhsachlop>div>p,
-.danhsachdulieu>div>p {
+.danhsachlop>div>p {
     text-align: center;
     margin: 0;
     padding: .5rem;
     border-radius: 10px;
 }
 
-.danhsachlop>div>p:hover,
-.danhsachdulieu>div>p:hover {
+.danhsachlop>div>p:hover {
     background-color: #ebecfe;
 }
 

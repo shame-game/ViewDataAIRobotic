@@ -210,10 +210,10 @@ function pageHome(callback) {
                             <div><h1 style="font-weight: bold;text-transform: uppercase;">Dữ liệu mới và học sinh</h1></div>
                             <div class="maindast">
         <div>
-            <h1 style="display:flex;gap:1rem;margin:0px">Số data đã chăm sóc trong ngày: <p id="datadachamsoc"></p></h1>
+            <h1 style="display:flex;gap:1rem;margin:0px">Số data chăm sóc thành công trong tháng: <p id="datadachamsoc"></p></h1>
         </div>
         <div class="mun">
-            <h1>Dữ liệu mới (ngày)</h1>
+            <h1>Dữ liệu chăm sóc (ngày)</h1>
             <div id="data-day">
                 <div>
                     <div  style=""></div>
@@ -222,7 +222,7 @@ function pageHome(callback) {
             </div>
         </div>
         <div class="mun">
-            <h1>Dữ liệu mới (tuần)</h1>
+            <h1>Dữ liệu chăm sóc (tháng)</h1>
             <div id="data-week">
                 <div>
                     <div style=""></div>
